@@ -8,22 +8,22 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var entry = JSON.parse(entry);
 
-    document.getElementById('fname').innerHTML = entry.fname;
-    document.getElementById('lname').innerHTML = entry.lname;
-    document.getElementById('address').innerHTML = entry.address;
-    document.getElementById('city').innerHTML = entry.city;
-    document.getElementById('province').innerHTML = entry.province;
-    document.getElementById('postal').innerHTML = entry.postal;
-    document.getElementById('phone').innerHTML = entry.phone;
-    document.getElementById('email').innerHTML = entry.email;
-    document.getElementById('notes').innerHTML = entry.notes;
+    document.getElementById('fname').value = entry.fname;
+    document.getElementById('lname').value = entry.lname;
+    document.getElementById('address').value = entry.address;
+    document.getElementById('city').value = entry.city;
+    document.getElementById('province').value = entry.province;
+    document.getElementById('postal').value = entry.postal;
+    document.getElementById('phone').value = entry.phone;
+    document.getElementById('email').value = entry.email;
+    document.getElementById('notes').value = entry.notes;
 
 }, false);
 
 
 function remove() {
     var email = window.localStorage.getItem("remove");
-    window.localStorage.remove(email);
-    window.localStorage.remove("remove");
-    window.location.href = '../new/index.html';
+    window.localStorage.removeItem(email);
+    window.localStorage.removeItem("remove");
+    window.location.href = '/new/index.html';
 }
