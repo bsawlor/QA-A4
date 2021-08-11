@@ -26,7 +26,7 @@ function allStorage() {
 }
 
 function display() {
-    var tableRef = document.getElementById("entries"); //.getElementsByTagName("tbody");
+    var tableRef = document.getElementById('entries').getElementsByTagName('tbody')[0]; //.getElementById("entries"); //
 
     for (var i = 0; i < localStorage.length; i++) {
         var entry = JSON.parse(localStorage.getItem(localStorage.key(i)));
@@ -42,6 +42,7 @@ function display() {
         var phone = row.insertCell(6);
         var email = row.insertCell(7);
         var notes = row.insertCell(8);
+        // var remove = row.insertCell(9);
 
         fname.innerHTML = entry.fname;
         lname.innerHTML = entry.lname;
@@ -52,6 +53,8 @@ function display() {
         phone.innerHTML = entry.phone;
         email.innerHTML = entry.email;
         notes.innerHTML = entry.notes;
+        // remove.innerHTML = `<a href='#' onclick='window.localStorage.removeItem(${entry.email})'>Remove</a>`;
+        // remove.innerHTML = `<a href='#' onclick='remove(${entry.email})'>Remove</a>`;
 
 
         // entry.map(instance => {
@@ -66,6 +69,7 @@ function display() {
     }
 }
 
-function search(input) {
-
+function remove(input) {
+    window.localStorage.removeItem(input);
+    window.location.href = "/search/index.html";
 }

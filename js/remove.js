@@ -25,5 +25,5 @@ function remove() {
     var email = window.localStorage.getItem("remove");
     window.localStorage.removeItem(email);
     window.localStorage.removeItem("remove");
-    window.location.href = '/new/index.html';
+    window.location.href = "/new/index.html";
 }

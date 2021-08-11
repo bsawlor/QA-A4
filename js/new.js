@@ -1,3 +1,9 @@
+const { exit } = require("process");
+
+document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('fname').focus();
+});
+
 function validate(fname, lname, address, city, province, postal, phone, email, notes) {
     // fname, lname, address, city, province, postal, phone, email, notes
     // var fname = document.getElementById("fname").value;
@@ -9,22 +15,33 @@ function validate(fname, lname, address, city, province, postal, phone, email, n
     // var phone = document.getElementById("phone").value;
     // var email = document.getElementById("email").value;
     // var notes = document.getElementById("notes").value;
+    if (fname == "" || lname == "" || address == "" || city == "" || province == "" || postal == "" || phone == "" || email == "" || notes == "") {
+        alert("Incomplete form, please fill in every field.");
+        return;
+    }
 
+    if (!checkIfPostal(postal)) {
+        // alert(`${postal} is an invalid postal code. Please enter a new postal code.`);
+        alert(`Invalid postal code. Please enter a new postal code.`);
+        return;
+        // exit;
+    }
+
+    if (!checkIfPhone(phone)) {
+        // alert(`${phone} is an invalid phone. Please enter one formatted like either of these: 123-123-1234, or (123)123-1234).`);
+        alert(`Please enter one formatted like either of these: 123-123-1234, or (123)123-1234).`);
+        return;
+        // exit;
+    }
 
     if (checkIfExists(email)) {
-        alert(`${email} has already been entered as a contact. Please enter a new email.`);
+        // alert(`${email} has already been entered as a contact. Please enter a new email.`);
+        alert(`That has already been entered as a contact. Please enter a new email.`);
         return;
+        // exit;
     }
 
-    if (checkIfPostal(postal)) {
-        alert(`${postal} is an invalid postal code. Please enter a new postal code.`);
-        return;
-    }
-
-    if (checkIfPhone(phone)) {
-        alert(`${phone} is an invalid phone. Please enter one formatted like either of these: 123-123-1234, or (123)123-1234).`);
-        return;
-    }
+    var date = Date.now();
 
     const entry = {
         fname: fname,
@@ -36,6 +53,14 @@ function validate(fname, lname, address, city, province, postal, phone, email, n
         phone: phone,
         email: email,
         notes: notes,
+        date: date,
+    }
+
+
+
+    var key = {
+        date: date,
+        email: email,
     }
 
     save(email, entry);
@@ -59,7 +84,8 @@ function remove_link(email) {
 
 function checkIfPhone(phone) {
     //var pattern = /(\d{3}\-\d{3}\-\d{4})|(\(\d{3}\)\d{3}\-\d{4})/g;
-    var pattern = new RegExp("/^((\d{3}\-)|(\(\d{3}\)))\d{3}\-\d{4}$/g");
+    // var pattern = new RegExp("/^((\d{3}\-)|(\(\d{3}\)))\d{3}\-\d{4}$/g");
+    var pattern = /^((\d{3}\-)|(\(\d{3}\)))\d{3}\-\d{4}$/g;
     // var result = pattern.test(phone);
     // if (result.length == 7)
     // {
@@ -72,14 +98,14 @@ function checkIfPhone(phone) {
 
 
 function checkIfPostal(postal) {
-    var pattern = /[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ] \d[ABCEGHJKLMNPRSTVWXYZ]\d/;
+    // var pattern = /[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ] \d[ABCEGHJKLMNPRSTVWXYZ]\d/;
+    // var pattern = new RegExp("/[ABCEGHJKLMNPRSTVXY]\d[ABCEGHJKLMNPRSTVWXYZ] \d[ABCEGHJKLMNPRSTVWXYZ]\d/");
+    // var pattern = new RegExp("/^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i");
+    // var pattern = new RegExp("^[A-Z]\d[A-Z]-\d[A-Z]\d$");
 
-    // var result = pattern.test(postal);
-    // if (result.length == 7)
-    // {
-    //     return true;
-    // }
-    // return false;
+    var pattern = /^[A-Z]\d[A-Z]-\d[A-Z]\d$/i;
+
+    // var pattern = /^[ABCEGHJ-NPRSTVXY]\d[ABCEGHJ-NPRSTV-Z][ -]?\d[ABCEGHJ-NPRSTV-Z]\d$/i;
 
     return pattern.test(postal);
 }

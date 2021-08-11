@@ -10,7 +10,7 @@
 <ul>
     <li><a href="../index.html">Home</a></li>
     <li><a href="../search/index.html">Search</a></li>
-    <li><a href="index.html">New</a></li>
+    <li><a href="../new/index.html">New</a></li>
 </ul>
 <form method="post">
     <h2>Contact Name</h2>
@@ -31,9 +31,9 @@
     <label for="email">Email address</label>
     <input type="email" required id="email" name="email" readonly><br><br>
     <label for="notes">Notes</label>
-    <input type="textarea" required id="notes" name="notes" readonly><br><br>
-    <button id="submit" value="Remove" onclick="remove()" class="btn btn-primary">Remove</button>
+    <textarea type="textarea" required id="notes" name="notes" readonly></textarea><br><br>
 </form>
+<button id="submit" value="Remove" onclick="remove()" class="btn btn-primary">Remove</button>
 <div id="entry-saved">
 </div>
 
